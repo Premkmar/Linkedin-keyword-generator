@@ -1,0 +1,205 @@
+html{
+    scroll-behavior: smooth;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    }
+/* Reset some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar styles */
+nav {
+    background-color: #0073b1;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+nav .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+nav .nav-links a:hover {
+    text-decoration: underline;
+}
+
+
+/*nextion*/
+
+
+/* Main Section Layout */
+.main-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem;
+}
+
+/* Carousel Section */
+.carousel-section {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.carousel-caption h5 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.carousel-caption p {
+    font-size: 1.2rem;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: black;
+}
+
+/* Image Section */
+.image-section {
+    flex: 1;
+    margin-left: 2rem;
+}
+
+.image-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Generate Content Button */
+.center-button {
+    text-align: center;
+    margin-top: 2px;
+    padding-bottom:20rem;
+}
+
+.center-button .btn {
+    font-size: 1.2rem;
+    padding: 1.5rem 2rem 2.6rem;
+    height:3rem;
+    background-color: #0073b1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.center-button .btn:hover {
+    background-color: #005a8b;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-left:3rem;
+    padding-right:3rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+}
+
+input, select, textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Required Field Styling */
+span {
+    color: red;
+}
+
+/* Placeholder Styling */
+input::placeholder, textarea::placeholder {
+    color: #888;
+}
+
+/* Focus Effect */
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Button Styling */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:active {
+    background-color:white;
+    color: #007bff;
+    border: 2px solid #007bff;
+    transition:0.6s;
+}
+
+#gen-btn{
+    justify-content:center;
+    padding-left:16rem;
+    padding-right:18rem;
+}
+
+/* Textarea Styling */
+textarea {
+    resize: vertical;
+}
+
+/* Optional Fields Styling */
+textarea[readonly], input[readonly] {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    }
+  

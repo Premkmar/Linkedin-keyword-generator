@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Headline & About Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='Home.css')}}">
+</head>
+<body>
+    
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">LinkedIn Generator</div>
+    </nav>
+
+    <!--Next content-->
+    <div class="main-section d-flex justify-content-between align-items-center">
+        <!-- Left Carousel Section -->
+        <div class="carousel-section">
+            <div id="projectDescriptionCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{url_for('static',filename='images/slide_01.jpg')}}" class="d-block w-100" alt="Slide 1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Welcome to LinkedIn Generator</h5>
+                            <p>Boost your LinkedIn profile with optimized headlines and an effective "About Me" section using AI!</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{url_for('static',filename='images/slide_02.jpg')}}" class="d-block w-100" alt="Slide 2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Easy to Use</h5>
+                            <p>Fill in a few details like your role, skills, experience, and projects, and let the AI generate the perfect LinkedIn profile.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{url_for('static',filename='images/slide_03.jpg')}}" class="d-block w-100" alt="Slide 3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Get Started Now</h5>
+                            <p>Click "Generate Content" to generate your optimized LinkedIn profile in seconds!</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#projectDescriptionCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#projectDescriptionCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Image Section -->
+        <div class="image-section">
+            <img src="{{url_for('static',filename='images/example.jpg')}}" alt="LinkedIn Profile Image" class="w-100">
+        </div>
+    </div>
+
+    <!-- Generate Content Button -->
+    <div class="center-button">
+        <a href="#to-scroll"><button class="btn btn-primary ">Generate Content</button></a>
+    </div>
+
+    <!--form section-->
+    <section id="to-scroll">
+    <form action="/submit-form" method="POST">
+        <h1>Fill this Information</h1>
+        <hr><br>
+    
+        <!-- General Information -->
+        <div class="form-group">
+            <label for="fullName">Full Name <span>*</span></label>
+            <input type="text" id="fullName" name="fullName" class="form-control" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="jobTitle">Current Job Title/Role <span>*</span></label>
+            <input type="text" id="jobTitle" name="jobTitle" class="form-control" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="industry">Industry <span>*</span></label>
+            <select id="industry" name="industry" class="form-control" required>
+                <option value="">Select Industry</option>
+                <option value="Technology">Technology</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Finance">Finance</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="skills">Key Skills <span>*</span></label>
+            <input type="text" id="skills" name="skills" class="form-control" placeholder="Enter skills separated by commas" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="experience">Years of Experience <span>*</span></label>
+            <input type="number" id="experience" name="experience" class="form-control" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="achievements">Achievements or Notable Projects <span>*</span></label>
+            <textarea id="achievements" name="achievements" class="form-control" rows="4" required></textarea>
+        </div>
+    
+        <div class="form-group">
+            <label for="headline">Current LinkedIn Headline (Optional)</label>
+            <textarea id="headline" name="headline" class="form-control" rows="2"></textarea>
+        </div>
+    
+        <div class="form-group">
+            <label for="motto">Personal/Professional Motto or Values <span>*</span></label>
+            <textarea id="motto" name="motto" class="form-control" rows="2" required></textarea>
+        </div>
+    
+        <!-- School / College Details -->
+        <h6>School / College Details</h6>
+        <div class="row">
+            <div class="col-6">
+                <label>Name of the program</label>
+                <select class="form-control program-name-1" name="program-name-1" onchange="handelChangeProgram(1)">
+                    <option selected disabled>Select Program</option>
+                    <option value="10th">10th</option>
+                    <option value="12th">12th</option>
+                    <option value="ug">UG</option>
+                    <option value="pg">PG</option>
+                    <option value="diploma">Diploma</option>
+                    <option value="iti">ITI</option>
+                    <option value="m.phil">M.Phil</option>
+                    <option value="phd">PhD</option>
+                    <option value="other">Other</option>
+                </select>
+               
+            </div>
+            <div class="col-6 remove-1 d-none">
+                <button class="btn btn-danger form-control" type="button" onclick="hideEducation(1)">Remove</button>
+            </div>
+        </div>
+        <div class="education-detail-1"></div>
+    
+        <!--<div class="row my-2">
+            <div class="col-6"></div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6"><button class="form-control btn btn-primary" type="button">Previous</button></div>
+                    <div class="col-6"><button class="form-control btn btn-success" type="button">Next</button></div>
+                </div>
+            </div>
+        </div>-->
+       
+    <!--work experience section-->
+    <h6>Work Experience</h6>
+    <div class="row">
+        <div class="col-12">
+            <input type="text" name="company-1" class="form-control">
+            <label>Name of the Company</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <input type="text" name="designation-1" class="form-control">
+            <label>Designation</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <input type="text" name="experience-1" class="form-control">
+            <label>Year of Experience</label>
+        </div>
+    </div>
+    <div class="more-company"></div>
+    <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6">
+            <button class="btn btn-primary form-control" type="button" onclick="addWork()">+ Add Work Experience</button>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <!--<div class="row my-2">
+        <div class="col-6"></div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6"><button class="form-control btn btn-primary" type="button">Previous</button></div>
+                <div class="col-6"><button class="form-control btn btn-success" type="submit">Next</button></div>
+            </div>
+        </div>
+    </div>-->
+    <div class="form-group" id="gen-btn">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+    </form>
+</section>
+    
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 LinkedIn Generator | Built for IBM Hackathon
+    </footer>
+    <script src="{{ url_for('static', filename='js/Home.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
+
+</script>
+
+</body>
+</html>
