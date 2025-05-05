@@ -1,70 +1,73 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, redirect, url_for
+import requests  # for sending request to AI API
 
 app = Flask(__name__)
 
-# Dummy AI model function - replace this with your Granite model inference
-def run_local_ai_model(data):
-    # Example: generate a simple summary string based on input data
-    full_name = data.get("full_name", "Unknown")
-    skills = data.get("skills", "No skills provided")
-    headline = data.get("headline", "")
-    summary = f"{full_name} is a professional skilled in {skills}. Headline: {headline}"
-    return summary
+# 🔑 API KEY placeholder
+API_KEY = "YOUR_API_KEY_HERE"  # ← Replace this with your actual API Key
+API_URL = "https://api.your-llm-provider.com/generate"  # ← Replace with your API endpoint
 
-# Home page with form
 @app.route('/')
 def home():
-    return '''
-    <h1>AI Profile Generator</h1>
-    <form action="/submit-form" method="post">
-        Full Name: <input type="text" name="fullName"><br>
-        Skills: <input type="text" name="skills"><br>
-        Headline: <input type="text" name="headline"><br>
-        <input type="submit" value="Generate">
-    </form>
-    '''
+    return render_template('Home.html')
 
-# Local AI API endpoint
-@app.route('/api/generate', methods=['POST'])
-def api_generate():
-    try:
-        data = request.get_json()
-        ai_response = run_local_ai_model(data)
-        return jsonify({"output": ai_response}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-# Form submission handler that calls local AI API
 @app.route('/submit-form', methods=['POST'])
 def submit_form():
     # Collect form data
     full_name = request.form.get('fullName')
+    job_title = request.form.get('jobTitle')
+    industry = request.form.get('industry')
     skills = request.form.get('skills')
+    experience = request.form.get('experience')
+    achievements = request.form.get('achievements')
     headline = request.form.get('headline')
+    motto = request.form.get('motto')
+    
+    # Collect work experience fields (optional: handle multiple entries)
+    company_1 = request.form.get('company-1')
+    designation_1 = request.form.get('designation-1')
+    experience_1 = request.form.get('experience-1')
 
+    # Prepare the payload for API call
     payload = {
         "full_name": full_name,
+        "job_title": job_title,
+        "industry": industry,
         "skills": skills,
-        "headline": headline
+        "experience": experience,
+        "achievements": achievements,
+        "headline": headline,
+        "motto": motto,
+        "work_experience": [
+            {
+                "company": company_1,
+                "designation": designation_1,
+                "years": experience_1
+            }
+        ]
     }
 
-    import requests
+    # Prepare headers (include API key)
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",  # 👈 include API key in header
+        "Content-Type": "application/json"
+    }
+
     try:
-        # Call the local AI API endpoint
-        response = requests.post('http://localhost:5000/api/generate', json=payload)
+        # Call the external AI API
+        response = requests.post(API_URL, json=payload, headers=headers)
+
+        # Check response
         if response.status_code == 200:
-            ai_output = response.json().get('output')
+            ai_output = response.json().get('output')  # assuming API returns {'output': 'text'}
         else:
             ai_output = f"API Error: {response.status_code} - {response.text}"
+
     except Exception as e:
         ai_output = f"Request failed: {str(e)}"
 
-    # Display the AI output
-    return f'''
-    <h1>Generated Profile Summary</h1>
-    <p>{ai_output}</p>
-    <a href="/">Go Back</a>
-    '''
+    # Render result template
+    return render_template('result.html', result=ai_output)
 
 if __name__ == '__main__':
     app.run(debug=True)
